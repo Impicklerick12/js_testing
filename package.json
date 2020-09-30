@@ -2,7 +2,7 @@
   "name": "js_testing",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "source/index.js",
   "scripts": {
     "test": "jest"
   },
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Impicklerick12/js_testing/issues"
   },
-  "homepage": "https://github.com/Impicklerick12/js_testing#readme"
+  "homepage": "https://github.com/Impicklerick12/js_testing#readme",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
 }
