@@ -15,3 +15,30 @@ describe("repeatMessage block of multiple tests", () => {
         expect(typeof(repeatMessage)).toBe("function")
     })
 })
+
+const request = require('supertest');
+let { app } = require('../source/index'); // importing the instance of our express server
+
+describe('express server home page functionality', () => {
+    test('should return status 200', async() => {
+        const response = await request(app).get('/');
+        expect(response.statusCode).toEqual(200);
+    })
+
+    test('should return the phrase "Hello World!"', async () => {
+        const response = await request(app).get('/');
+        expect(response.body.message).toEqual("Hello World!");
+    });
+});
+
+describe('/studentNames page functionality', () => {
+    test('should return the word "Luke"', async() => {
+        const response = await request(app)
+        .post('/studentNames')
+        .send({
+            studentNames: ["Luke", "Ash", "Nandini"]
+        })
+
+        expect(response.body.firstStudentName).toEqual("Luke");
+    })
+});
