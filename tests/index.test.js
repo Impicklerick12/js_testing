@@ -17,22 +17,37 @@ describe("repeatMessage block of multiple tests", () => {
 })
 
 const request = require('supertest');
-let { app } = require('../source/index'); // importing the instance of our express server
+let { server, app } = require('../source/index'); // importing the instance of our express server
+
+afterAll(async(done) => {
+    // force our server to close
+    await server.close();
+
+    // hack to trick jest into waiting a bit before
+    // it freaks out over the process hanging open
+    await new Promise(resolve => setTimeout(() => resolve(), 500));
+
+    done();
+})
 
 describe('express server home page functionality', () => {
-    test('should return status 200', async() => {
+    test('should return status 200', async(done) => {
         const response = await request(app).get('/');
         expect(response.statusCode).toEqual(200);
+
+        done();
     })
 
-    test('should return the phrase "Hello World!"', async () => {
+    test('should return the phrase "Hello World!"', async (done) => {
         const response = await request(app).get('/');
         expect(response.body.message).toEqual("Hello World!");
+
+        done();
     });
 });
 
 describe('/studentNames page functionality', () => {
-    test('should return the word "Luke"', async() => {
+    test('should return the word "Luke"', async(done) => {
         const response = await request(app)
         .post('/studentNames')
         .send({
@@ -40,5 +55,7 @@ describe('/studentNames page functionality', () => {
         })
 
         expect(response.body.firstStudentName).toEqual("Luke");
+
+        done();
     })
 });
