@@ -11,7 +11,7 @@ describe("repeatMessage block of multiple tests", () => {
         expect(repeatMessage("a", 5)).not.toEqual("aaaaaa");
     })
 
-    test("should be a function", () {
+    test("should be a function", () => {
         expect(typeof(repeatMessage)).toBe("function")
     })
 })
